@@ -5,6 +5,7 @@ import {
   Router,
 } from '@angular/router';
 import { AuthenticationService } from './ApiAuthorization/AuthorizeService';
+import { state } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,16 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     debugger;
     const currentUser = this.logg.currentUserValue;
-    if (currentUser) {
+    const role = localStorage.getItem('role');
+    if (role==='1'||role==='2') {
       return true;
     } else {
       alert('You are Not Authorized');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
       return false;
     }
   }
 }
+
+
+     

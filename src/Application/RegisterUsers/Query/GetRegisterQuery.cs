@@ -4,6 +4,7 @@ using Application.Models;
 using Application.UserAccount.Registration;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using RegisterDTO = Application.UserAccount.Registration.RegisterDTO;
 
 namespace Application.RegisterUsers.Query
 {
-  public  class GetRegisterQuery : GridQuery, IRequest<GridResult<RegisterDTO>>
+    public class GetRegisterQuery : GridQuery, IRequest<GridResult<RegisterDTO>>
     {
 
     }
@@ -29,24 +30,27 @@ namespace Application.RegisterUsers.Query
         }
         public async Task<GridResult<RegisterDTO>> Handle(GetRegisterQuery request, CancellationToken cancellationToken)
         {
-            try
             {
-                var data = await _context.Set<Domain.Entities.Register>().Select(x => new RegisterDTO
+                try
                 {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Email=x.Email,
-                    Address=x.Address,
-                    PhoneNo=x.PhoneNo,
-                    isVerified=x.isVerified
-                   
-                }).DynamicPageAsync(request, cancellationToken);
-                return data;
-            }
-            catch (Exception)
-            {
+                    var data = await _context.Set<Domain.Entities.Register>().Include(x => x.Roles).Select(x => new RegisterDTO
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Email = x.Email,
+                        Address = x.Address,
+                        PhoneNo = x.PhoneNo,
+                        isVerified = x.isVerified,
+                        Roles = x.Roles
 
-                return null;
+                    }).DynamicPageAsync(request, cancellationToken);
+                    return data;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
             }
         }
     }

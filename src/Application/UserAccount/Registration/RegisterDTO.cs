@@ -27,5 +27,8 @@ namespace Application.UserAccount.Registration
         public string PhoneNo { get; set; }
         public bool isVerified { get; set; } = false;
         public int RolesId { get; set; }
+        public Domain.Entities.Roles Roles { get; set; }
+        public int DesignationId { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

@@ -195,6 +195,9 @@ export interface IEmployeeClient {
     addEmployees(request: AddEmployeeCommand): Observable<Result>;
     deleteEmployees(request: DeleteEmployeeCommand): Observable<Result>;
     updateEmployees(request: UpdateEmployeeCommand): Observable<Result>;
+    getDepartments(request: GetDepartments): Observable<GridResultOfDepartment>;
+    getDesignations(request: GetDesignations): Observable<GridResultOfDesignations>;
+    employeesQueryByEmail(request: GetByIdEmployee): Observable<GetEMPDTO>;
 }
 
 @Injectable({
@@ -417,11 +420,169 @@ export class EmployeeClient implements IEmployeeClient {
         }
         return _observableOf<Result>(<any>null);
     }
+
+    getDepartments(request: GetDepartments): Observable<GridResultOfDepartment> {
+        let url_ = this.baseUrl + "/api/Employee/getDepartments";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDepartments(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDepartments(<any>response_);
+                } catch (e) {
+                    return <Observable<GridResultOfDepartment>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GridResultOfDepartment>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetDepartments(response: HttpResponseBase): Observable<GridResultOfDepartment> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GridResultOfDepartment.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GridResultOfDepartment>(<any>null);
+    }
+
+    getDesignations(request: GetDesignations): Observable<GridResultOfDesignations> {
+        let url_ = this.baseUrl + "/api/Employee/getDesignations";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDesignations(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDesignations(<any>response_);
+                } catch (e) {
+                    return <Observable<GridResultOfDesignations>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GridResultOfDesignations>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetDesignations(response: HttpResponseBase): Observable<GridResultOfDesignations> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GridResultOfDesignations.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GridResultOfDesignations>(<any>null);
+    }
+
+    employeesQueryByEmail(request: GetByIdEmployee): Observable<GetEMPDTO> {
+        let url_ = this.baseUrl + "/api/Employee/employeesQueryByEmail";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEmployeesQueryByEmail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEmployeesQueryByEmail(<any>response_);
+                } catch (e) {
+                    return <Observable<GetEMPDTO>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetEMPDTO>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processEmployeesQueryByEmail(response: HttpResponseBase): Observable<GetEMPDTO> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetEMPDTO.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetEMPDTO>(<any>null);
+    }
 }
 
 export interface IRegisterClient {
     registerQuery(request: GetRegisterQuery): Observable<GridResultOfRegisterDTO>;
     registerQuerybyId(request: GetByIdRegister): Observable<RegisterDTO>;
+    updateUser(request: UpdateUserCommand): Observable<Result>;
+    deleteUser(request: DeleteUserCommand): Observable<Result>;
 }
 
 @Injectable({
@@ -539,6 +700,110 @@ export class RegisterClient implements IRegisterClient {
             }));
         }
         return _observableOf<RegisterDTO>(<any>null);
+    }
+
+    updateUser(request: UpdateUserCommand): Observable<Result> {
+        let url_ = this.baseUrl + "/api/Register/updateUser";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateUser(<any>response_);
+                } catch (e) {
+                    return <Observable<Result>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Result>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUpdateUser(response: HttpResponseBase): Observable<Result> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Result>(<any>null);
+    }
+
+    deleteUser(request: DeleteUserCommand): Observable<Result> {
+        let url_ = this.baseUrl + "/api/Register/deleteUser";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteUser(<any>response_);
+                } catch (e) {
+                    return <Observable<Result>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Result>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteUser(response: HttpResponseBase): Observable<Result> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Result>(<any>null);
     }
 }
 
@@ -674,6 +939,9 @@ export class RegisterDTO implements IRegisterDTO {
     phoneNo!: string;
     isVerified?: boolean;
     rolesId?: number;
+    roles?: Roles | undefined;
+    designationId?: number;
+    departmentId?: number;
 
     constructor(data?: IRegisterDTO) {
         if (data) {
@@ -695,6 +963,9 @@ export class RegisterDTO implements IRegisterDTO {
             this.phoneNo = _data["phoneNo"];
             this.isVerified = _data["isVerified"];
             this.rolesId = _data["rolesId"];
+            this.roles = _data["roles"] ? Roles.fromJS(_data["roles"]) : <any>undefined;
+            this.designationId = _data["designationId"];
+            this.departmentId = _data["departmentId"];
         }
     }
 
@@ -716,6 +987,9 @@ export class RegisterDTO implements IRegisterDTO {
         data["phoneNo"] = this.phoneNo;
         data["isVerified"] = this.isVerified;
         data["rolesId"] = this.rolesId;
+        data["roles"] = this.roles ? this.roles.toJSON() : <any>undefined;
+        data["designationId"] = this.designationId;
+        data["departmentId"] = this.departmentId;
         return data; 
     }
 }
@@ -730,6 +1004,9 @@ export interface IRegisterDTO {
     phoneNo: string;
     isVerified?: boolean;
     rolesId?: number;
+    roles?: Roles | undefined;
+    designationId?: number;
+    departmentId?: number;
 }
 
 export class RegisterCommand extends RegisterDTO implements IRegisterCommand {
@@ -757,6 +1034,46 @@ export class RegisterCommand extends RegisterDTO implements IRegisterCommand {
 }
 
 export interface IRegisterCommand extends IRegisterDTO {
+}
+
+export class Roles implements IRoles {
+    id?: number;
+    name?: string | undefined;
+
+    constructor(data?: IRoles) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): Roles {
+        data = typeof data === 'object' ? data : {};
+        let result = new Roles();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        return data; 
+    }
+}
+
+export interface IRoles {
+    id?: number;
+    name?: string | undefined;
 }
 
 export class LoginDTO implements ILoginDTO {
@@ -909,10 +1226,16 @@ export class EmpDTO implements IEmpDTO {
     id?: number;
     name?: string | undefined;
     address?: string | undefined;
-    phone?: string | undefined;
+    phoneNo?: string | undefined;
+    salary?: string | undefined;
+    email?: string | undefined;
+    image?: string | undefined;
     departmentId?: number;
     department?: Department | undefined;
-    token?: string | undefined;
+    designationId?: number;
+    designations?: Designations | undefined;
+    project?: Project | undefined;
+    rolesId?: number;
 
     constructor(data?: IEmpDTO) {
         if (data) {
@@ -928,10 +1251,16 @@ export class EmpDTO implements IEmpDTO {
             this.id = _data["id"];
             this.name = _data["name"];
             this.address = _data["address"];
-            this.phone = _data["phone"];
+            this.phoneNo = _data["phoneNo"];
+            this.salary = _data["salary"];
+            this.email = _data["email"];
+            this.image = _data["image"];
             this.departmentId = _data["departmentId"];
             this.department = _data["department"] ? Department.fromJS(_data["department"]) : <any>undefined;
-            this.token = _data["token"];
+            this.designationId = _data["designationId"];
+            this.designations = _data["designations"] ? Designations.fromJS(_data["designations"]) : <any>undefined;
+            this.project = _data["project"] ? Project.fromJS(_data["project"]) : <any>undefined;
+            this.rolesId = _data["rolesId"];
         }
     }
 
@@ -947,10 +1276,16 @@ export class EmpDTO implements IEmpDTO {
         data["id"] = this.id;
         data["name"] = this.name;
         data["address"] = this.address;
-        data["phone"] = this.phone;
+        data["phoneNo"] = this.phoneNo;
+        data["salary"] = this.salary;
+        data["email"] = this.email;
+        data["image"] = this.image;
         data["departmentId"] = this.departmentId;
         data["department"] = this.department ? this.department.toJSON() : <any>undefined;
-        data["token"] = this.token;
+        data["designationId"] = this.designationId;
+        data["designations"] = this.designations ? this.designations.toJSON() : <any>undefined;
+        data["project"] = this.project ? this.project.toJSON() : <any>undefined;
+        data["rolesId"] = this.rolesId;
         return data; 
     }
 }
@@ -959,10 +1294,16 @@ export interface IEmpDTO {
     id?: number;
     name?: string | undefined;
     address?: string | undefined;
-    phone?: string | undefined;
+    phoneNo?: string | undefined;
+    salary?: string | undefined;
+    email?: string | undefined;
+    image?: string | undefined;
     departmentId?: number;
     department?: Department | undefined;
-    token?: string | undefined;
+    designationId?: number;
+    designations?: Designations | undefined;
+    project?: Project | undefined;
+    rolesId?: number;
 }
 
 export class Department implements IDepartment {
@@ -1001,6 +1342,94 @@ export class Department implements IDepartment {
 }
 
 export interface IDepartment {
+    id?: number;
+    name?: string | undefined;
+}
+
+export class Designations implements IDesignations {
+    id?: number;
+    name?: string | undefined;
+    departmentId?: number;
+    department?: Department | undefined;
+
+    constructor(data?: IDesignations) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.departmentId = _data["departmentId"];
+            this.department = _data["department"] ? Department.fromJS(_data["department"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Designations {
+        data = typeof data === 'object' ? data : {};
+        let result = new Designations();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["departmentId"] = this.departmentId;
+        data["department"] = this.department ? this.department.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IDesignations {
+    id?: number;
+    name?: string | undefined;
+    departmentId?: number;
+    department?: Department | undefined;
+}
+
+export class Project implements IProject {
+    id?: number;
+    name?: string | undefined;
+
+    constructor(data?: IProject) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): Project {
+        data = typeof data === 'object' ? data : {};
+        let result = new Project();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        return data; 
+    }
+}
+
+export interface IProject {
     id?: number;
     name?: string | undefined;
 }
@@ -1190,6 +1619,272 @@ export class UpdateEmployeeCommand extends EmpDTO implements IUpdateEmployeeComm
 export interface IUpdateEmployeeCommand extends IEmpDTO {
 }
 
+export class GridResultOfDepartment implements IGridResultOfDepartment {
+    data?: Department[] | undefined;
+    total?: number;
+    page?: number;
+
+    constructor(data?: IGridResultOfDepartment) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Department.fromJS(item));
+            }
+            this.total = _data["total"];
+            this.page = _data["page"];
+        }
+    }
+
+    static fromJS(data: any): GridResultOfDepartment {
+        data = typeof data === 'object' ? data : {};
+        let result = new GridResultOfDepartment();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["total"] = this.total;
+        data["page"] = this.page;
+        return data; 
+    }
+}
+
+export interface IGridResultOfDepartment {
+    data?: Department[] | undefined;
+    total?: number;
+    page?: number;
+}
+
+export class GetDepartments extends GridQuery implements IGetDepartments {
+
+    constructor(data?: IGetDepartments) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): GetDepartments {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetDepartments();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IGetDepartments extends IGridQuery {
+}
+
+export class GridResultOfDesignations implements IGridResultOfDesignations {
+    data?: Designations[] | undefined;
+    total?: number;
+    page?: number;
+
+    constructor(data?: IGridResultOfDesignations) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Designations.fromJS(item));
+            }
+            this.total = _data["total"];
+            this.page = _data["page"];
+        }
+    }
+
+    static fromJS(data: any): GridResultOfDesignations {
+        data = typeof data === 'object' ? data : {};
+        let result = new GridResultOfDesignations();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["total"] = this.total;
+        data["page"] = this.page;
+        return data; 
+    }
+}
+
+export interface IGridResultOfDesignations {
+    data?: Designations[] | undefined;
+    total?: number;
+    page?: number;
+}
+
+export class GetDesignations extends GridQuery implements IGetDesignations {
+
+    constructor(data?: IGetDesignations) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): GetDesignations {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetDesignations();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IGetDesignations extends IGridQuery {
+}
+
+export class GetEMPDTO implements IGetEMPDTO {
+    id?: number;
+    name?: string | undefined;
+    address?: string | undefined;
+    phoneNo?: string | undefined;
+    salary?: string | undefined;
+    email?: string | undefined;
+    departmentId?: number;
+    designationId?: number;
+    image?: string | undefined;
+    rolesId?: number;
+
+    constructor(data?: IGetEMPDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.address = _data["address"];
+            this.phoneNo = _data["phoneNo"];
+            this.salary = _data["salary"];
+            this.email = _data["email"];
+            this.departmentId = _data["departmentId"];
+            this.designationId = _data["designationId"];
+            this.image = _data["image"];
+            this.rolesId = _data["rolesId"];
+        }
+    }
+
+    static fromJS(data: any): GetEMPDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetEMPDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["address"] = this.address;
+        data["phoneNo"] = this.phoneNo;
+        data["salary"] = this.salary;
+        data["email"] = this.email;
+        data["departmentId"] = this.departmentId;
+        data["designationId"] = this.designationId;
+        data["image"] = this.image;
+        data["rolesId"] = this.rolesId;
+        return data; 
+    }
+}
+
+export interface IGetEMPDTO {
+    id?: number;
+    name?: string | undefined;
+    address?: string | undefined;
+    phoneNo?: string | undefined;
+    salary?: string | undefined;
+    email?: string | undefined;
+    departmentId?: number;
+    designationId?: number;
+    image?: string | undefined;
+    rolesId?: number;
+}
+
+export class GetByIdEmployee implements IGetByIdEmployee {
+    email?: string | undefined;
+
+    constructor(data?: IGetByIdEmployee) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+        }
+    }
+
+    static fromJS(data: any): GetByIdEmployee {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetByIdEmployee();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        return data; 
+    }
+}
+
+export interface IGetByIdEmployee {
+    email?: string | undefined;
+}
+
 export class GridResultOfRegisterDTO implements IGridResultOfRegisterDTO {
     data?: RegisterDTO[] | undefined;
     total?: number;
@@ -1303,6 +1998,125 @@ export class GetByIdRegister implements IGetByIdRegister {
 
 export interface IGetByIdRegister {
     regId?: number;
+}
+
+export class RegUpdateDto implements IRegUpdateDto {
+    id?: number;
+    name?: string | undefined;
+    email?: string | undefined;
+    address?: string | undefined;
+    phoneNo?: string | undefined;
+    rolesId?: number;
+
+    constructor(data?: IRegUpdateDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.email = _data["email"];
+            this.address = _data["address"];
+            this.phoneNo = _data["phoneNo"];
+            this.rolesId = _data["rolesId"];
+        }
+    }
+
+    static fromJS(data: any): RegUpdateDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegUpdateDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["email"] = this.email;
+        data["address"] = this.address;
+        data["phoneNo"] = this.phoneNo;
+        data["rolesId"] = this.rolesId;
+        return data; 
+    }
+}
+
+export interface IRegUpdateDto {
+    id?: number;
+    name?: string | undefined;
+    email?: string | undefined;
+    address?: string | undefined;
+    phoneNo?: string | undefined;
+    rolesId?: number;
+}
+
+export class UpdateUserCommand extends RegUpdateDto implements IUpdateUserCommand {
+
+    constructor(data?: IUpdateUserCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): UpdateUserCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateUserCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IUpdateUserCommand extends IRegUpdateDto {
+}
+
+export class DeleteUserCommand implements IDeleteUserCommand {
+    usrId?: number;
+
+    constructor(data?: IDeleteUserCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.usrId = _data["usrId"];
+        }
+    }
+
+    static fromJS(data: any): DeleteUserCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeleteUserCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["usrId"] = this.usrId;
+        return data; 
+    }
+}
+
+export interface IDeleteUserCommand {
+    usrId?: number;
 }
 
 export class GridResultOfRolesDTO implements IGridResultOfRolesDTO {

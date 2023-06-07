@@ -35,8 +35,13 @@ namespace Application.Employee.Command
                 emp.Id = request.Id;
                 emp.Name = request.Name;
                 emp.Address = request.Address;
-                emp.Phone = request.Phone;
+                emp.PhoneNo = request.PhoneNo;
+                emp.Email = request.Email;
+                emp.Salary = request.Salary;
                 emp.DepartmentId = request.DepartmentId;
+                emp.DesignationsId = request.DesignationId;
+                emp.Image = request.Image;
+                emp.RolesId = request.RolesId;
             }
              _context.Set<Domain.Entities.Employee>().Update(emp);
             await _context.SaveChangesAsync(cancellationToken);

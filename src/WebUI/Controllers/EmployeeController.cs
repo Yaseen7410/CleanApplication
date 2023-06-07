@@ -2,6 +2,7 @@
 using Application.Employee.Command;
 using Application.Employee.Query;
 using Application.Models;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +33,21 @@ namespace WebUI.Controllers
         }
         [HttpPost("[action]")]
         public async Task<ActionResult<Result>> updateEmployees(updateEmployeeCommand request)
+        {
+            return await Mediator.Send(request);
+        }
+        [HttpPost("[action]")]
+        public async Task<ActionResult<GridResult<Department>>> getDepartments(getDepartments request)
+        {
+            return await Mediator.Send(request);
+        }
+        [HttpPost("[action]")]
+        public async Task<ActionResult<GridResult<Designations>>> getDesignations(getDesignations request)
+        {
+            return await Mediator.Send(request);
+        }
+        [HttpPost("[action]")]
+        public async Task<ActionResult<GetEMPDTO>> employeesQueryByEmail(GetByIdEmployee request)
         {
             return await Mediator.Send(request);
         }

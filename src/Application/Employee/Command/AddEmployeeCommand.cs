@@ -34,11 +34,15 @@ namespace Application.Employee.Command
                 {
                     emp.Name = request.Name;
                     emp.Address = request.Address;
-                    emp.Phone = request.Phone;
+                    emp.PhoneNo = request.PhoneNo;
+                    emp.RolesId = request.RolesId;
+                    emp.Email = request.Email;
                     emp.DepartmentId = request.DepartmentId;
+                    emp.DesignationsId = request.DesignationId;
                 }
                 await _context.Set<Domain.Entities.Employee>().AddAsync(emp);
                 await _context.SaveChangesAsync(cancellationToken);
+
                 return Result.Success(new string[] { "Record Successfully Saved" });
 
             }

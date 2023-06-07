@@ -213,10 +213,6 @@ C:\Users\ym247\Desktop\Application\CleanApplication\src\WebUI\obj\Debug\net5.0\W
 C:\Users\ym247\Desktop\Application\CleanApplication\src\WebUI\obj\Debug\net5.0\ref\WebUI.dll
 C:\Users\ym247\Desktop\Application\CleanApplication\src\WebUI\obj\Debug\net5.0\WebUI.pdb
 C:\Users\ym247\Desktop\Application\CleanApplication\src\WebUI\obj\Debug\net5.0\WebUI.genruntimeconfig.cache
-C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.csprojAssemblyReference.cache
-C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.dll
-C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\ref\WebUI.dll
-C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.pdb
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\appsettings.Development.json
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\appsettings.json
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\ClientApp\angular.json
@@ -402,6 +398,7 @@ C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\Infrastructure.d
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\Application.pdb
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\Infrastructure.pdb
 C:\Yash CS\EmployeeManagement-master\src\WebUI\bin\Debug\net5.0\Domain.pdb
+C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.csprojAssemblyReference.cache
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.AssemblyInfoInputs.cache
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.AssemblyInfo.cs
@@ -428,4 +425,7 @@ C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.RazorTarge
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.RazorTargetAssemblyInfo.cs
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.Views.pdb
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.csproj.CopyComplete
+C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.dll
+C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\ref\WebUI.dll
+C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.pdb
 C:\Yash CS\EmployeeManagement-master\src\WebUI\obj\Debug\net5.0\WebUI.genruntimeconfig.cache

@@ -13,17 +13,17 @@ C:\Users\ym247\Desktop\Application\CleanApplication\src\Application\obj\Debug\ne
 C:\Users\ym247\Desktop\Application\CleanApplication\src\Application\obj\Debug\net5.0\Application.dll
 C:\Users\ym247\Desktop\Application\CleanApplication\src\Application\obj\Debug\net5.0\ref\Application.dll
 C:\Users\ym247\Desktop\Application\CleanApplication\src\Application\obj\Debug\net5.0\Application.pdb
+C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.csprojAssemblyReference.cache
+C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.AssemblyInfoInputs.cache
+C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.AssemblyInfo.cs
+C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.csproj.CoreCompileInputs.cache
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\Application.deps.json
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\Application.dll
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\ref\Application.dll
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\Application.pdb
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\Domain.dll
 C:\Yash CS\EmployeeManagement-master\src\Application\bin\Debug\net5.0\Domain.pdb
-C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.csprojAssemblyReference.cache
-C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.AssemblyInfoInputs.cache
-C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.AssemblyInfo.cs
-C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.csproj.CoreCompileInputs.cache
 C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.csproj.CopyComplete
 C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\Application.dll
 C:\Yash CS\EmployeeManagement-master\src\Application\obj\Debug\net5.0\ref\Application.dll

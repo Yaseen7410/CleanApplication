@@ -43,7 +43,19 @@ namespace Application.UserAccount.Login
                             // generate token 
                             var jwtToken = _currentUserService.GenerateEncodedToken(Convert.ToString(logindetails.Id), logindetails.Email, logindetails.Roles);
                             //  return Result.Success(new string[] { "User Login successfully", });
-                            return Result.Success(new string[] { "User Login successfully", jwtToken.Result.encodedJwt });
+                            //return Result.Success(new string[] { "User Login successfully", jwtToken.Result.encodedJwt });
+                            var response = new
+                            {
+                                message = "User Login successfully",
+                                token = jwtToken.Result.encodedJwt,
+                                role = logindetails.RolesId,
+                                name=logindetails.Name,
+                                email=logindetails.Email
+                            };
+
+
+
+                            return Result.Success(response);
                         }
 
                         else

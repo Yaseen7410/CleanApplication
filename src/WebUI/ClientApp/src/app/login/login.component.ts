@@ -56,10 +56,12 @@ export class LoginComponent implements OnInit {
           debugger;
           if (data.succeeded) {
             this.loading = false;
+            location.reload();
             this.success();
             // this.successMessage = data.lists;
             // console.log(this.successMessage);
             this.router.navigateByUrl('/home');
+           
           } else {
             console.log(data.errors);
     

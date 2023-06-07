@@ -230,6 +230,102 @@
         }
       }
     },
+    "/api/Employee/getDepartments": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "operationId": "Employee_getDepartments",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetDepartments"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GridResultOfDepartment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Employee/getDesignations": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "operationId": "Employee_getDesignations",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetDesignations"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GridResultOfDesignations"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Employee/employeesQueryByEmail": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "operationId": "Employee_employeesQueryByEmail",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetByIdEmployee"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEMPDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Register/registerQuery": {
       "post": {
         "tags": [
@@ -287,6 +383,70 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RegisterDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/updateUser": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "Register_updateUser",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/deleteUser": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "Register_deleteUser",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -405,6 +565,36 @@
           "rolesId": {
             "type": "integer",
             "format": "int32"
+          },
+          "roles": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Roles"
+              }
+            ]
+          },
+          "designationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Roles": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -481,7 +671,19 @@
             "type": "string",
             "nullable": true
           },
-          "phone": {
+          "phoneNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "salary": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
             "type": "string",
             "nullable": true
           },
@@ -497,13 +699,73 @@
               }
             ]
           },
-          "token": {
+          "designationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "designations": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Designations"
+              }
+            ]
+          },
+          "project": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Project"
+              }
+            ]
+          },
+          "rolesId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Department": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
             "type": "string",
             "nullable": true
           }
         }
       },
-      "Department": {
+      "Designations": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "department": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Department"
+              }
+            ]
+          }
+        }
+      },
+      "Project": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -592,6 +854,126 @@
           }
         ]
       },
+      "GridResultOfDepartment": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Department"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetDepartments": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GridQuery"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "GridResultOfDesignations": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Designations"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetDesignations": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GridQuery"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "GetEMPDTO": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "salary": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "designationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "rolesId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetByIdEmployee": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "GridResultOfRegisterDTO": {
         "type": "object",
         "additionalProperties": false,
@@ -629,6 +1011,57 @@
         "additionalProperties": false,
         "properties": {
           "regId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateUserCommand": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RegUpdateDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "RegUpdateDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "rolesId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DeleteUserCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "usrId": {
             "type": "integer",
             "format": "int32"
           }

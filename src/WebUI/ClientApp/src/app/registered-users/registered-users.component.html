@@ -1,6 +1,15 @@
-<div class="employee-container">
+<div class="employee-container" #TABLE >
+  <button
+  (click)="export()"
+        style="margin-bottom: 5px; font-weight: bold;"
+        matTooltip="Eksport table to Excel document"
+      >
+        Export to Excel
+      </button>
+      <!-- //(click)="onBtExport($event)" -->
   <table
     mat-table
+    #table
     [dataSource]="dataSource"
     matSort
     matSortActive="name"
@@ -22,20 +31,149 @@
       <th mat-header-cell *matHeaderCellDef>Email</th>
       <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
     </ng-container>
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef>Roles</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.roles.name }}</td>
+    </ng-container>
     <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let employee">
-        <a [routerLink]="['/register', employee.id]">
-          <mat-icon>edit</mat-icon>
-        </a>
-        <mat-icon>delete</mat-icon>
-      </td>
+        <div  *ngIf="rol==1" class="row" >
+          <button data-toggle="modal" data-target="#editmodal" class="btn btn-primary"  (click)="EditClick(employee)"><i class="fa fa-edit" aria-hidden="true"></i></button>&nbsp;
+          <button class="btn btn-danger" (click)="DeleteClick(employee.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        </div>
+       
+        </td>
+      
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <!-- <mat-paginator
+  <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
-  ></mat-paginator> -->
+  ></mat-paginator>
+
+  
+  <div class="modal" tabindex="-1" role="dialog" id="editmodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Edit Employee</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- registration.component.html -->
+<form >
+  <mat-form-field>
+    <input
+      matInput
+     
+      name="name"
+      [(ngModel)]="editdata.name"
+     
+      required
+  /></mat-form-field>
+
+  <br />
+
+  <mat-form-field>
+    <input
+      matInput
+     
+      name="email"
+      [(ngModel)]="editdata.email"
+      required
+  /></mat-form-field>
+
+  <br />
+
+  <mat-form-field>
+    <input
+      matInput
+      name="phoneNo"
+      
+      [(ngModel)]="editdata.phoneNo"
+      
+      
+  /></mat-form-field>
+ 
+  <br />
+
+  <mat-form-field>
+    <textarea
+      matInput
+      
+      [(ngModel)]="editdata.address"
+      name="address"
+     
+      required
+    ></textarea>
+  </mat-form-field>
+ 
+  <br />
+  <mat-form-field>
+    <mat-label>Select A Role</mat-label>
+    <mat-select
+      name="rolesId"
+     [(ngModel)]="editdata.rolesId"
+    >
+      <mat-option *ngFor="let role of rolesData" [value]="role.id">
+        {{ role.name }}
+        {{ role.id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <mat-form-field *ngIf="editdata.rolesId === 2 ">
+    <mat-label>Select A Department</mat-label>
+    <mat-select
+      name="departmentId"
+     [(ngModel)]="editdata.departmentId"
+    >
+      <mat-option *ngFor="let dep of Dept"  [value]="dep.id">
+        {{dep.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
+  <mat-form-field *ngIf="editdata.rolesId === 2 ">
+    <mat-label>Select A Designation</mat-label>
+    <mat-select
+      name="designationId"
+     
+     [(ngModel)]="editdata.designationId"
+    >
+      <mat-option *ngFor="let dsp of Desg" [value]="dsp.id"  >
+       {{dsp.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+ 
+</form>
+
+       </div>
+      <div class="modal-footer">
+        <button
+    mat-raised-button
+    color="primary"
+  
+   (click)="UpdateClick()"
+  >
+    Update
+  </button>&nbsp;
+  <button
+    mat-raised-button
+    color="warn"
+    data-dismiss="modal"
+   
+  >
+    Close
+  </button>
+        
+      </div>
+    </div>
+  </div>
 </div>

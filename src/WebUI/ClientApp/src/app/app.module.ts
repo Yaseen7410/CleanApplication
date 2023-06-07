@@ -25,6 +25,13 @@ import { AuthGuard } from './auth.guard';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { MatSelectModule } from '@angular/material/select';
 import { RegisteredUsersComponent } from './registered-users/registered-users.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { EmployeeInfoComponent } from './employee-info/employee-info.component';
+import { SalaryComponent } from './salary/salary.component'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +42,10 @@ import { RegisteredUsersComponent } from './registered-users/registered-users.co
     RegisterComponent,
     VerifyEmailComponent,
     RegisteredUsersComponent,
+    EmployeeInfoComponent,
+    SalaryComponent,
+    SidenavComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,7 +55,9 @@ import { RegisteredUsersComponent } from './registered-users/registered-users.co
     ReactiveFormsModule,
     MatIconModule,
     MatToolbarModule,
+    MatExpansionModule,
     MatInputModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatButtonModule,
     MatCardModule,
@@ -55,7 +68,8 @@ import { RegisteredUsersComponent } from './registered-users/registered-users.co
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-
+    MatSidenavModule,
+    MatListModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

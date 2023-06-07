@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Application.RegisterUsers.Commands;
 using Application.RegisterUsers.Query;
 using Application.UserAccount.Registration;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,17 @@ namespace WebUI.Controllers
         }
         [HttpPost("[action]")]
         public async Task<ActionResult<RegisterDTO>> registerQuerybyId(GetByIdRegister request)
+        {
+            return await Mediator.Send(request);
+        }
+        [HttpPost("[action]")]
+        public async Task<ActionResult<Result>> updateUser(updateUserCommand request)
+        {
+            return await Mediator.Send(request);
+        }
+        [HttpPost("[action]")]
+        public async Task<ActionResult<Result>> deleteUser(DeleteUserCommand request)
+
         {
             return await Mediator.Send(request);
         }

@@ -1,40 +1,462 @@
-<p>
-  <mat-toolbar
-    class="mr-auto"
-    color="primary"
-    *ngIf="nav.navbarVisible && currentUser"
-  >
-    <!-- //*ngIf="isLoggedIn$ | async as isLoggedIn" -->
-    <a routerLink="home" class="text-white p-1 m-1"> Home </a>
-    <a routerLink="registeredUsers" class="text-white p-1 m-1">
-      Registered users
-    </a>
-    <a routerLink="employeelist" class="text-white p-1 m-1"> Employeelist </a>
-    <div class="col-9">
-      <button
-        mat-button
-        (click)="logout()"
-        *ngIf="currentUser"
-        class="text-white float-right"
-      >
-        Logout
+<!-- 
+
+ <mat-sidenav-container>
+ 
+  <mat-sidenav-content>
+    <mat-toolbar
+
+      class="mr-auto"
+      color="primary"
+      *ngIf="nav.navbarVisible && currentUser"
+    >
+      <label>Employee</label>
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>    
+
       </button>
+           <a routerLink="home" class="text-white p-1 m-1"> Home </a>
+      <a routerLink="registeredUsers" class="text-white p-1 m-1">
+        Registered users
+      </a>
+      <a routerLink="employeelist" class="text-white p-1 m-1"> Employeelist </a>
+      <div class="col-7">
 
-      <a routerLink="login" *ngIf="!currentUser" class="text-white float-right">
-        &nbsp;Login &nbsp;</a
-      >
-    </div>
-  </mat-toolbar>
-</p>
 
-<div>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle  float-right" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hi {{ name1 }}  
+          </a>
+        
+          <div class="dropdown-menu text-black"    aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item text-black" >EmployeeName:{{name1}}</a>
+            <a class="dropdown-item bg-info" >EmployeeEmail:{{email}}</a>
+            <a class="dropdown-item" >Something else here</a>
+          </div>
+        </div>
+
+        <button
+          mat-button
+          (click)="logout()"
+          *ngIf="currentUser"
+          class="text-white float-right"
+        >
+          Logout
+        </button>
+        <a
+          routerLink="login"
+          *ngIf="!currentUser"
+          class="text-white float-right"
+        >
+          &nbsp;Login &nbsp;</a
+        >
+      </div>
+      <div>
+        <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
+          <div class="col-5">Employee Management Project</div>
+          <div class="col-9 row">
+            <button routerLink="/register" mat-button>Register</button>
+          </div>
+        </mat-toolbar>
+      </div>
+    </mat-toolbar>
+ </mat-sidenav-content>
+ 
+</mat-sidenav-container>
+
+
+<mat-sidenav color="primary" #sidenav mode="side" dismiss="sidenav" closed>
+  <mat-nav-list color="primary" >
+    <mat-list-item routerLink="/employee-info" routerLinkActive="active"
+      >Info</mat-list-item
+    >
+    <mat-list-item routerLink="/salary" routerLinkActive="active"
+      >salary</mat-list-item
+    >
+    <mat-list-item routerLink="/products" routerLinkActive="active"
+      >Products</mat-list-item
+    >
+    <mat-list-item routerLink="/contact" routerLinkActive="active"
+      >Contact</mat-list-item
+    >
+  </mat-nav-list>
+</mat-sidenav> 
+
+
+
+
+<router-outlet></router-outlet>  -->
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary "  *ngIf="nav.navbarVisible && currentUser">
+  
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>    
+    <mat-sidenav color="primary" #sidenav mode="side" dismiss="sidenav" closed>
+      <mat-nav-list color="primary" >
+        <mat-list-item routerLink="/employee-info" routerLinkActive="active"
+          >Info</mat-list-item
+        >
+        <mat-list-item routerLink="/salary" routerLinkActive="active"
+          >salary</mat-list-item
+        >
+        <mat-list-item routerLink="/products" routerLinkActive="active"
+          >Products</mat-list-item
+        >
+        <mat-list-item routerLink="/contact" routerLinkActive="active"
+          >Contact</mat-list-item
+        >
+      </mat-nav-list>
+    </mat-sidenav>
+  </button>
+
+  <a class="navbar-brand" >Employee</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link"routerLink="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="registeredUsers">Registered users</a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link " routerLink="employeelist">Employee List</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 col-7">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         {{name1}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" >{{name1}}</a>
+          <a class="dropdown-item" >{{email}}</a>
+          <button
+          class="dropdown-item bg-danger"
+          (click)="logout()"
+          *ngIf="currentUser"
+          class="text-white float-right"
+        >
+          Logout
+        </button>
+           <button class="dropdown-item" >logout</button> -->
+          <!-- </div>
+      </li>
+      
+    </form>
+    <a
+          routerLink="login"
+          *ngIf="!currentUser"
+          class="text-white float-right"
+        >
+          &nbsp;Login &nbsp;</a
+        >
+  </div>
+</nav> --> 
+<!-- <div>
   <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
     <div class="col-5">Employee Management Project</div>
     <div class="col-9 row">
       <button routerLink="/register" mat-button>Register</button>
+    </div> -->
+    
+
+    <!-- <mat-toolbar
+
+    class="mr-auto"
+    color="primary"
+    *ngIf="nav.navbarVisible && currentUser"
+  >
+
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>    
+    </button>
+         <a routerLink="home" class="text-white p-1 m-1"> Home </a>
+    <a routerLink="registeredUsers" class="text-white p-1 m-1">
+      Registered users
+    </a>
+    <a routerLink="employeelist" class="text-white p-1 m-1"> Employeelist </a>
+    <div class="col-9"  >
+      <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+        
+        <button mat-menu-item >
+            <mat-icon>perm_contact_calendar</mat-icon><span>{{name1}}</span>
+        </button>
+        <button mat-menu-item >
+            <mat-icon>email</mat-icon><span>{{email}}</span>
+        </button>
+        <button mat-menu-item routerLink="/employee-info">
+          <mat-icon>person</mat-icon><span>My Account</span>
+      </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item   (click)="logout()"
+        *ngIf="currentUser">
+            <mat-icon>exit_to_app</mat-icon>Logout
+        </button>
+    </mat-menu>
+      <a
+        routerLink="login"
+        *ngIf="!currentUser"
+        class="text-white float-right"
+      >
+        &nbsp;Login &nbsp;</a
+      >
     </div>
+    <div>
+      <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
+        <div class="col-5">Employee Management Project</div>
+        <div class="col-9 row">
+          <button routerLink="/register" mat-button>Register</button>
+        </div>
+      </mat-toolbar>
+    </div>
+
   </mat-toolbar>
-</div>
-<!-- <h1>Hi {{ currentUser.email }}</h1> -->
-<router-outlet></router-outlet>
-<!-- <a routerLink="login" class="text-white float-right"> &nbsp;Logout </a> -->
+
+  <mat-sidenav-container class="app-container">
+  <mat-sidenav color="primary" #sidenav mode="side" dismiss="sidenav" closed>
+
+    <mat-nav-list color="primary" >
+      <mat-list-item routerLink="/employee-info" routerLinkActive="active"
+        >Info</mat-list-item
+      >
+      <mat-list-item routerLink="/salary" routerLinkActive="active"
+        >salary</mat-list-item
+      >
+      <mat-list-item routerLink="/products" routerLinkActive="active"
+        >Products</mat-list-item
+      >
+      <mat-list-item routerLink="/contact" routerLinkActive="active"
+        >Contact</mat-list-item
+      >
+    </mat-nav-list>
+    
+  </mat-sidenav> -->
+  
+  <!-- <mat-drawer-container  >
+    
+    <mat-drawer  
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [opened]="!mobileQuery.matches"
+      [ngClass]="{ 'sidenav-collapsed': collapsedNav && !mobileQuery.matches}"
+      
+    >
+    <div *ngIf="currentUser" >
+      <div class="sidenav-header" >
+        <span>{{ collapsedNav && !mobileQuery.matches ? 'E' : 'Employee' }}</span>
+      </div>
+      <ul>
+          <li routerLink="/employee-info" routerLinkActive="active"><span>My Profile</span></li>
+            <li routerLink="/salary" routerLinkActive="active">Salary</li>
+      </ul>
+    </div>
+    </mat-drawer>
+ 
+    <mat-drawer-content
+      [ngClass]="{ 'sidenav-collapsed': collapsedNav && !mobileQuery.matches }"
+    >
+      <mat-toolbar  class="mr-auto"
+      color="primary"
+      *ngIf="nav.navbarVisible && currentUser">
+         <button mat-icon-button (click)="snav.toggle()"> 
+        <button
+          mat-icon-button
+          (click)="
+            mobileQuery.matches ? snav.toggle() : (collapsedNav = !collapsedNav)
+          "
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a routerLink="home" class="text-white p-1 m-1"> Home </a>
+        <a routerLink="registeredUsers" class="text-white p-1 m-1">
+          Registered users
+        </a>
+        <a routerLink="employeelist" *ngIf="roleid==1"  class="text-white p-1 m-1"> Employeelist </a>
+        <div class="float-right">
+          <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+            
+            <button mat-menu-item >
+                <mat-icon>perm_contact_calendar</mat-icon><span>{{name1}}</span>
+            </button>
+            <button mat-menu-item >
+                <mat-icon>email</mat-icon><span>{{email}}</span>
+            </button>
+            <button mat-menu-item routerLink="/employee-info">
+              <mat-icon>person</mat-icon><span>My Account</span>
+          </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item   (click)="logout()"
+            *ngIf="currentUser">
+                <mat-icon>exit_to_app</mat-icon>Logout
+            </button>
+        </mat-menu>
+          <a
+            routerLink="login"
+            *ngIf="!currentUser"
+            class="text-white float-right"
+          >
+            &nbsp;Login &nbsp;</a
+          >
+        </div>
+        <div>
+          <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
+            <div class="col-5">Employee Management Project</div>
+            <div class="col-9 row">
+              <button routerLink="/register" mat-button>Register</button>
+            </div>
+          </mat-toolbar>
+        </div>
+        
+      </mat-toolbar>
+      <div>
+        <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
+          <div class="col-5">Employee Management Project</div>
+          <div class="col-9 row">
+            <button routerLink="/register" mat-button>Register</button>
+          </div>
+          </mat-toolbar>
+          </div>
+      <router-outlet></router-outlet> 
+    </mat-drawer-content>
+  </mat-drawer-container>
+   -->
+
+   <!DOCTYPE html>
+   <html>
+   <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <style>
+   body {
+     font-family: "Lato", sans-serif;
+   }
+   
+   .sidenav {
+     height: 100%;
+     width: 0;
+     position: fixed;
+     z-index: 1;
+     top: 0;
+     left: 0;
+     background-color: #111;
+     overflow-x: hidden;
+     transition: 0.5s;
+     padding-top: 60px;
+   }
+   
+   .sidenav a {
+     padding: 8px 8px 8px 32px;
+     text-decoration: none;
+     font-size: 25px;
+     color: #818181;
+     display: block;
+     transition: 0.3s;
+   }
+   
+   .sidenav a:hover {
+     color: #f1f1f1;
+   }
+   
+   .sidenav .closebtn {
+     position: absolute;
+     top: 0;
+     right: 25px;
+     font-size: 36px;
+     margin-left: 50px;
+   }
+   
+   #main {
+     transition: margin-left .5s;
+     padding: 16px;
+   }
+   
+   @media screen and (max-height: 450px) {
+     .sidenav {padding-top: 15px;}
+     .sidenav a {font-size: 18px;}
+   }
+   </style>
+   </head>
+   <body>
+   
+   <div id="mySidenav" class="sidenav">
+     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+     <img
+     class="avatar mat-elevation-z8"
+     [src]="this.img"
+     style="height: 100px; width: 100px; border-radius: 50px; margin-left: 30px;"
+   />
+     <a routerLink="/employee-info">Profile</a>
+     <a routerLink="/salary">Salary</a>
+     <a href="#">Clients</a>
+     <a href="#">Contact</a>
+   </div>
+   
+   <div id="main">
+    <mat-toolbar class=" bg-primary" *ngIf="nav.navbarVisible && currentUser">  
+     <span style="font-size:30px;cursor:pointer" class="text-white"  onclick="openNav()">&#9776; </span>
+     <a routerLink="home" class="text-white p-1 m-1"> Home </a>
+     <a routerLink="registeredUsers" class="text-white p-1 m-1">
+       Registered users
+     </a>
+     <a routerLink="employeelist"   *ngIf="roleid==1"class="text-white p-1 m-1"> Employeelist </a>
+     <div class="form-inline float-right">
+     <button mat-icon-button matTooltip="My Account" class="text-white "  [matMenuTriggerFor]="userAccountMenu">
+      <img
+      class="avatar mat-elevation-z8 "
+      [src]="this.img"
+      style="height: 50px; width: 50px; border-radius: 50px; margin-bottom: 30px; "
+    />
+   </button>
+   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+       
+       <button mat-menu-item >
+           <mat-icon>perm_contact_calendar</mat-icon><span>{{name1}}</span>
+       </button>
+       <button mat-menu-item >
+           <mat-icon>email</mat-icon><span>{{email}}</span>
+       </button>
+       <button mat-menu-item routerLink="/employee-info">
+         <mat-icon >person</mat-icon><span>My Account</span>
+     </button>
+       <mat-divider></mat-divider>
+       <button mat-menu-item   (click)="logout()"
+       *ngIf="currentUser">
+           <mat-icon>exit_to_app</mat-icon>Logout
+       </button>
+   </mat-menu>
+  </div>
+    </mat-toolbar>
+    <div>
+     <mat-toolbar class="mr-auto" color="primary" *ngIf="!currentUser">
+       <div class="col-5">Employee Management Project</div>
+       <div class="col-9 row">
+         <button routerLink="/register" mat-button>Register</button>
+       </div>
+     </mat-toolbar>
+   </div>
+    <router-outlet></router-outlet>
+   </div>
+  
+      
+   </body>
+   </html> 
+   
+   
+  
+
+
+
+
+
+
+
+

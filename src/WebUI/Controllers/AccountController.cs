@@ -13,12 +13,10 @@ namespace WebUI.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult<Result>> registerRequest(RegisterCommand command)
         {
-
             return await Mediator.Send(command);
         }
         [HttpPost("[action]")]
         public async Task<ActionResult<Result>> loginRequest(LoginCommand command)
-      
         {
             return await Mediator.Send(command);
         }

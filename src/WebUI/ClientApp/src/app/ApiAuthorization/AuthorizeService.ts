@@ -36,10 +36,18 @@ export class AuthenticationService {
         map((user) => {
           debugger;
           console.log(user);
-          // login successful if there's a jwt token in the response
           if (user.succeeded == true) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
+           const role = user.lists.role;
+            const token = user.lists.token;
+            const name= user.lists.name;
+            const email =user.lists.email;
+            localStorage.setItem('currentUser', JSON.stringify( name));
+            localStorage.setItem('token', token );
+            localStorage.setItem('role',role);
+            localStorage.setItem('email',email);
+            //console.log(name);
+           // localStorage.setItem('currentUser', JSON.stringify(user.lists.token));
+           // localStorage.setItem('currentUser', JSON.stringify(user.lists.role));
             this.currentUserSubject.next(user);
           }
 
@@ -51,6 +59,10 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     this.logouttoast();
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
     this.currentUserSubject.next(null);
   }
   logouttoast(): void {

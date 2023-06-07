@@ -2,7 +2,9 @@
 using Application.Common.Interfaces;
 using Application.Models;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,18 +31,31 @@ namespace Application.Employee.Query
         {
             try
             {
-                var VelData = await _context.Set<Domain.Entities.Employee>().Select(x => new EmpDTO
+                var VelData = _context.Set<Domain.Entities.Employee>().Select(x => new EmpDTO
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
-                    Phone = x.Phone,
-                    //City = x.City,  
-                    DepartmentId = x.DepartmentId
-                }).DynamicPageAsync(request, cancellationToken);
-                return VelData;
+                    PhoneNo = x.PhoneNo,
+                    Salary = x.Salary,
+                    Department = x.Designations.Department,
+                    Designations = x.Designations,
+                    Project = x.Project
+                });
+                var total = await VelData.CountAsync(cancellationToken);
+                var totalPages = (int)Math.Ceiling((double)total / request.PageSize);
+                var data = await VelData.Skip((request.Page - 1) * request.PageSize)
+                    .Take(request.PageSize)
+                    .ToListAsync(cancellationToken);
+                return new GridResult<EmpDTO>
+                {
+                    Data = data,
+                    Total = total,
+                    Page = totalPages
+                };
             }
-            catch (Exception )
+
+            catch (Exception)
             {
 
                 return null;

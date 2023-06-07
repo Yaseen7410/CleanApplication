@@ -1,7 +1,9 @@
-C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\home\home.component.js
-C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\home\home.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\SoftMash-Api.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\SoftMash-Api.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employee-info\employee-info.component.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employee-info\employee-info.component.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\home\home.component.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\home\home.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\register\register.component.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\register\register.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employeelist\employeelist.component.js
@@ -18,10 +20,14 @@ C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\verify
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\verify-email\verify-email.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\registered-users\registered-users.component.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\registered-users\registered-users.component.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\salary\salary.component.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\salary\salary.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app-routing.module.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app-routing.module.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app.component.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app.component.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\sidenav\sidenav.component.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\sidenav\sidenav.component.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app.module.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\app.module.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\main.js
@@ -36,6 +42,8 @@ C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\auth.g
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\auth.guard.spec.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\navbar-service.service.spec.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\navbar-service.service.spec.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employee-info\employee-info.component.spec.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employee-info\employee-info.component.spec.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employeelist\employeelist.component.spec.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\employeelist\employeelist.component.spec.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\home\home.component.spec.js
@@ -46,5 +54,9 @@ C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\regist
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\register\register.component.spec.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\registered-users\registered-users.component.spec.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\registered-users\registered-users.component.spec.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\salary\salary.component.spec.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\salary\salary.component.spec.js.map
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\sidenav\sidenav.component.spec.js
+C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\sidenav\sidenav.component.spec.js.map
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\verify-email\verify-email.component.spec.js
 C:\Yash CS\EmployeeManagement-master\src\WebUI\ClientApp\dist\out-tsc\app\verify-email\verify-email.component.spec.js.map

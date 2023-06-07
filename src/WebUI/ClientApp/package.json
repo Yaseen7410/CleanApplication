@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "angular-auth-oidc-client": "15.0.5",
     "bootstrap": "^4.6.2",
+    "exceljs": "^4.3.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.4",
     "ngx-mask": "^14.2.4",
@@ -32,6 +33,7 @@
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.7.5",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

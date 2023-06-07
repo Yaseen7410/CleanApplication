@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Application.Employee;
 using Application.Models;
 using Application.UserAccount.Registration;
 using AutoMapper;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Application.RegisterUsers.Commands
 {
-   public class updateUserCommand: RegUpdateDto, IRequest<Result>
+    public class updateUserCommand : RegUpdateDto,IRequest<Result>
     {
     }
     public class updateUserHandler : IRequestHandler<updateUserCommand, Result>
@@ -26,22 +27,23 @@ namespace Application.RegisterUsers.Commands
         }
         public async Task<Result> Handle(updateUserCommand request, CancellationToken cancellationToken)
         {
-            var emp = await _context.Set<Domain.Entities.Register>().FindAsync(request.Id);
-            if (emp == null)
-                return Result.Failure(new string[] { "Employees not found" });
-            else
-            {
-                emp.Id = request.Id;
-                emp.Name = request.Name;
-                emp.Address = request.Address;
-                emp.PhoneNo = request.PhoneNo;
-                emp.Email = request.Email;
-                emp.RolesId = request.RolesId;
+           
+                var emp = await _context.Set<Domain.Entities.Register>().FindAsync(request.Id);
+                if (emp == null)
+                    return Result.Failure(new string[] { "Employees not found" });
+                else
+                {
+                    emp.Id = request.Id;
+                    emp.Name = request.Name;
+                    emp.Address = request.Address;
+                    emp.PhoneNo = request.PhoneNo;
+                    emp.Email = request.Email;
+                    emp.RolesId = request.RolesId;
+                }
+                //_context.Set<Domain.Entities.Register>().Update(emp);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result.Success(new string[] { "Record Successfully Saved" });
             }
-            //_context.Set<Domain.Entities.Register>().Update(emp);
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success(new string[] { "Record Successfully Saved" });
-
         }
     }
-}
+
